@@ -25,6 +25,10 @@ app.get("/donate/notifaction/user/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index2.html"));
 
 });
+app.use('/assets', express.static(path.join(__dirname, 'Public/assets')))
+app.use('/assets', express.static(path.join(__dirname, 'Public/plugins')))
+app.use('/assets', express.static(path.join(__dirname, 'Public/front end')))
+app.use('/assets', express.static(path.join(__dirname, 'Public/Uploads'))
 const axios = require('axios')
 // app.post("/pay", (req, res) => {
 //     io.emit("paymentSuccess");  
