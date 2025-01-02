@@ -39,98 +39,98 @@ const axios = require('axios')
 const payment = require("./stream model/payment");
 app.use(bodyParser.json());
 
-const cardtoken = []
-// Endpoint to handle the POST request
-app.post('/sendData', async (req, res) => {
-  console.log(req.body)
+// const cardtoken = []
+// // Endpoint to handle the POST request
+// app.post('/sendData', async (req, res) => {
+//   console.log(req.body)
 
 
-  const data = {
-    service_id: 31807,
-    card_number: req.body.card_number,
-    expire_date: req.body.expire_date,
-    temporary: 1
-  }
+//   const data = {
+//     service_id: 31807,
+//     card_number: req.body.card_number,
+//     expire_date: req.body.expire_date,
+//     temporary: 1
+//   }
 
-  const url = 'https://api.click.uz/v2/merchant/card_token/request'
-  const authToken = '38597:2548e4e19423b9bc551c60c52986d21d44b43a0a:1715849803 ';
-  try {
-    const response = await axios.post(url, data, {
-      headers: {
-        Auth: `${authToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-    });
+//   const url = 'https://api.click.uz/v2/merchant/card_token/request'
+//   const authToken = '38597:2548e4e19423b9bc551c60c52986d21d44b43a0a:1715849803 ';
+//   try {
+//     const response = await axios.post(url, data, {
+//       headers: {
+//         Auth: `${authToken}`,
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//     });
 
-    res.status(200).json(response.data);
+//     res.status(200).json(response.data);
 
-    cardtoken.push(response.data.card_token);
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+//     cardtoken.push(response.data.card_token);
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
-app.post('/verify', async (req, res) => {
-  console.log(req.body)
-
-
-  const data = {
-    service_id: 31807,
-    card_token: req.body.card_token,
-    sms_code:req.body.sms_code
-  }
-
-  const url = 'https://api.click.uz/v2/merchant/card_token/verify'
-  const authToken = '38597:2548e4e19423b9bc551c60c52986d21d44b43a0a:1715849803';
-  try {
-    const response = await axios.post(url, data, {
-      headers: {
-        Auth: `${authToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-    });
-
-    res.status(200).json(response.data);
-
-  
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-app.post('/amount', async (req, res) => {
-  console.log(req.body)
+// app.post('/verify', async (req, res) => {
+//   console.log(req.body)
 
 
-  const data = {
-    service_id: 31807,
-    card_token:req.body.card_token,
-    sms_code:5000,
-    transaction_parameter:404
-  }
+//   const data = {
+//     service_id: 31807,
+//     card_token: req.body.card_token,
+//     sms_code:req.body.sms_code
+//   }
 
-  const url = 'https://api.click.uz/v2/merchant/card_token/payment'
-  const authToken = '38597:a3c0b0893df9b87f775a74ce03b51040e4f47149:1711740955';
-  try {
-    const response = await axios.post(url, data, {
-      headers: {
-        Auth: `${authToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-    });
+//   const url = 'https://api.click.uz/v2/merchant/card_token/verify'
+//   const authToken = '38597:2548e4e19423b9bc551c60c52986d21d44b43a0a:1715849803';
+//   try {
+//     const response = await axios.post(url, data, {
+//       headers: {
+//         Auth: `${authToken}`,
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//     });
 
-    res.status(200).json(response.data);
+//     res.status(200).json(response.data);
 
   
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+// app.post('/amount', async (req, res) => {
+//   console.log(req.body)
+
+
+//   const data = {
+//     service_id: 31807,
+//     card_token:req.body.card_token,
+//     sms_code:5000,
+//     transaction_parameter:404
+//   }
+
+//   const url = 'https://api.click.uz/v2/merchant/card_token/payment'
+//   const authToken = '38597:a3c0b0893df9b87f775a74ce03b51040e4f47149:1711740955';
+//   try {
+//     const response = await axios.post(url, data, {
+//       headers: {
+//         Auth: `${authToken}`,
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json'
+//       },
+//     });
+
+//     res.status(200).json(response.data);
+
+  
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 app.post('/donate/:id',
   async (req, res) => {
     io.emit("paymentSuccess");
