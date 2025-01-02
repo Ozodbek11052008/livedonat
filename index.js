@@ -26,11 +26,11 @@ app.get("/donate/notifaction/user/:id", (req, res) => {
 
 });
 app.use('/assets', express.static(path.join(__dirname, 'Public/assets')))
-app.use('/assets', express.static(path.join(__dirname, 'Public/plugins')))
-app.use('/assets', express.static(path.join(__dirname, 'Public/front end')))
-app.use('/assets', express.static(path.join(__dirname, 'Public/frontend')))
+app.use('/plugins', express.static(path.join(__dirname, 'Public/plugins')))
+app.use('/frontend', express.static(path.join(__dirname, 'Public/frontend')))
+app.use('/front end', express.static(path.join(__dirname, 'Public/front end')))
 
-app.use('/assets', express.static(path.join(__dirname, 'Public/Uploads')))
+
 const axios = require('axios')
 // app.post("/pay", (req, res) => {
 //     io.emit("paymentSuccess");  
